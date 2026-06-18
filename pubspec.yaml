@@ -19,7 +19,7 @@ dependencies:
   # Translation and Voice Dependencies
   translator: ^0.1.7
   speech_to_text: ^6.6.0
-  flutter_tts: ^4.0.2
+  flutter_tts: ^4.2.5
 
 dev_dependencies:
   flutter_test:
