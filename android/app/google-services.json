@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1015760066788",
+    "project_id": "faizan-holistic-care",
+    "storage_bucket": "faizan-holistic-care.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015760066788:android:bc360e680797d8b9cc34f1",
+        "android_client_info": {
+          "package_name": "com.faizan.holisticcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnRLObLCkk3L1Gm7X7Hp6BGoUIsS5OXDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

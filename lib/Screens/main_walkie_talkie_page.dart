@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:translator/translator.dart';
+import 'package:translator/translator.dart'; // یہ امپورٹ ضروری ہے
 
 class MainWalkieTalkiePage extends StatefulWidget {
   const MainWalkieTalkiePage({super.key});
@@ -11,38 +9,48 @@ class MainWalkieTalkiePage extends StatefulWidget {
 }
 
 class _MainWalkieTalkiePageState extends State<MainWalkieTalkiePage> {
-  // یہاں وہی پرانا ترجمے والا لاجک رہے گا جو ہم نے پہلے ٹیسٹ کیا تھا
-  String currentStatus = "مائیک دبائیں";
-  bool isRecording = false;
-  stt.SpeechToText _speechToText = stt.SpeechToText();
-  FlutterTts flutterTts = FlutterTts();
-  final translator = GoogleTranslator();
-  String recognizedText = "";
-  String translatedText = "";
-  String patientLocale = 'ur-PK';
-  String patientTransCode = 'ur';
-  String doctorLocale = 'en-US';
-  String doctorTransCode = 'en';
+  final GoogleTranslator _translator = GoogleTranslator();
+  String _translatedText = "یہاں ترجمہ آئے گا...";
+  
+  // دنیا کی تمام بڑی زبانوں کی لسٹ (آپ اسے مزید بڑھا سکتے ہیں)
+  final Map<String, String> languages = {
+    'Urdu': 'ur',
+    'English': 'en',
+    'Chinese': 'zh-cn',
+    'Arabic': 'ar',
+    'Hindi': 'hi',
+    'Spanish': 'es',
+    // یہاں جتنی چاہیں زبانیں شامل کریں
+  };
 
-  final List<Map<String, String>> availableLanguages = [
-    {'name': 'اردو (Pakistan)', 'locale': 'ur-PK', 'transCode': 'ur'},
-    {'name': 'English (Global)', 'locale': 'en-US', 'transCode': 'en'},
-  ];
+  String _selectedLanguage = 'en';
 
-  @override
-  void initState() {
-    super.initState();
-    _speechToText.initialize();
+  void _translateText(String input) async {
+    var translation = await _translator.translate(input, to: _selectedLanguage);
+    setState(() {
+      _translatedText = translation.text;
+    });
   }
 
-  // (باقی تمام فنکشنز اور UI وہی ہیں جو ہم نے پہلے فائنل کیے تھے)
-  // نوٹ: آپ پچھلے والے کوڈ سے اس حصے کو یہاں کاپی پیسٹ کر سکتے ہیں تاکہ وقت ضائع نہ ہو
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Live Clinic")),
-      body: Center(child: Text("یہاں ہمارا ٹرانسلیشن انجن چلے گا")),
+      appBar: AppBar(title: const Text("Walkie Talkie Translator")),
+      body: Column(
+        children: [
+          DropdownButton<String>(
+            value: _selectedLanguage,
+            items: languages.entries.map((e) => DropdownMenuItem(value: e.value, child: Text(e.key))).toList(),
+            onChanged: (val) => setState(() => _selectedLanguage = val!),
+          ),
+          TextField(
+            onSubmitted: (value) => _translateText(value),
+            decoration: const InputDecoration(labelText: "اپنی بات لکھیں"),
+          ),
+          const SizedBox(height: 20),
+          Text(_translatedText, style: const TextStyle(fontSize: 20)),
+        ],
+      ),
     );
   }
 }

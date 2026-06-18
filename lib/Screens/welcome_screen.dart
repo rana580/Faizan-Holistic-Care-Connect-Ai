@@ -17,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(color: const Color(0xFF00796B).withOpacity(0.1), shape: BoxShape.circle),
+                decoration: BoxDecoration(color: const Color(0xFF00796B).withValues(alpha: 0.1), shape: BoxShape.circle),
                 child: const Icon(Icons.health_and_safety_rounded, size: 100, color: Color(0xFF00796B)),
               ),
               const SizedBox(height: 40),
@@ -57,7 +57,7 @@ class WelcomeScreen extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), border: Border.all(color: color.withOpacity(0.3), width: 2)),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), border: Border.all(color: color.withValues(alpha: 0.3), width: 2)),
         child: Row(
           children: [
             Icon(icon, color: color, size: 30),

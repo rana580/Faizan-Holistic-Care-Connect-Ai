@@ -82,7 +82,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 Expanded(
                   child: DropdownButtonFormField<String>(
                     decoration: const InputDecoration(labelText: "جنس (Gender)", border: OutlineInputBorder()),
-                    value: gender,
+                    initialValue: gender,
                     items: ['مرد', 'عورت', 'دیگر'].map((String value) {
                       return DropdownMenuItem<String>(value: value, child: Text(value));
                     }).toList(),

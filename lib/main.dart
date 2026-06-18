@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
-import 'Screens/welcome_screen.dart'; // یہ ہماری ویلکم سکرین کو جوڑ رہا ہے
+import 'package:firebase_core/firebase_core.dart';
+import 'screens/main_walkie_talkie_page.dart';
 
-void main() {
-  runApp(const FaizanHolisticCareApp());
+void main() async {
+  // ایپ شروع ہونے کا پیغام
+  debugPrint("--- App is starting now ---");
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  try {
+    // فائر بیس کو شروع کرنے کی کوشش
+    await Firebase.initializeApp();
+    debugPrint("--- Firebase Initialized Successfully ---");
+  } catch (e) {
+    // اگر فائر بیس میں کوئی مسئلہ ہوا تو یہاں نظر آ جائے گا
+    debugPrint("--- Firebase Error: $e ---");
+  }
+  
+  runApp(const MyApp());
 }
 
-class FaizanHolisticCareApp extends StatelessWidget {
-  const FaizanHolisticCareApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Faizan Holistic Care',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00796B)),
-        useMaterial3: true,
-        fontFamily: 'Roboto',
-      ),
-      // ایپ شروع ہوتے ہی سیدھا WelcomeScreen والے صفحے پر جائے گی
-      home: const WelcomeScreen(), 
+      home: MainWalkieTalkiePage(),
     );
   }
 }
